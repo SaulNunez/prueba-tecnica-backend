@@ -9,4 +9,5 @@ public class Viaje
     public Operador Operador { get; set; }
     public int RutaId { get; set; }
     public Ruta Ruta { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
