@@ -6,4 +6,7 @@ public class Viaje
     public DateTime FechaSalida { get; set; }
     public DateTime FechaLlegada { get; set; }
     public int OperadorId { get; set; }
+    public Operador Operador { get; set; }
+    public int RutaId { get; set; }
+    public Ruta Ruta { get; set; }
 }

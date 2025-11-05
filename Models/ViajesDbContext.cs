@@ -7,4 +7,5 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
 {
     public DbSet<Operador> Operadores { get; set; }
     public DbSet<Viaje> Viajes { get; set; }
+    public DbSet<Ruta> Rutas { get; set; }
 }
