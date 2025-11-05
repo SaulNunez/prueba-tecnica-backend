@@ -20,6 +20,12 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.Property(e => e.CreatedAt)
                   .HasDefaultValue(DateTimeOffset.UtcNow)
                   .ValueGeneratedOnAdd();
+            entity.HasData(
+                new Operador { Nombre = "Star Tours" },
+                new Operador { Nombre = "Viajes López" },
+                new Operador { Nombre = "Transportes Ya" },
+                new Operador { Nombre = "Limousines Centella"}
+            );
         });
 
         modelBuilder.Entity<Ruta>(entity =>
@@ -30,6 +36,18 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.Property(e => e.CreatedAt)
                   .HasDefaultValue(DateTimeOffset.UtcNow)
                   .ValueGeneratedOnAdd();
+            entity.HasData(
+                new Ruta { Origen = "Chihuahua", Destino = "Delicias" },
+                new Ruta { Origen = "Juárez", Destino = "Chihuahua" },
+                new Ruta { Origen = "Delicias", Destino = "Juárez" },
+                new Ruta { Origen = "Delicias", Destino = "Chihuahua" },
+                new Ruta { Origen = "Chihuahua", Destino = "Juárez" },
+                new Ruta { Origen = "Juárez", Destino = "Delicias" },
+                new Ruta { Origen = "Chihuahua", Destino = "Ciudad de México" },
+                new Ruta { Origen = "Ciudad de México", Destino = "Chihuahua" },
+                new Ruta { Origen = "Juárez", Destino = "Ciudad de México" },
+                new Ruta { Origen = "Ciudad de México", Destino = "Juárez" }
+            );
         });
 
         modelBuilder.Entity<Viaje>(entity =>
