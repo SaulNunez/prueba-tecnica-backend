@@ -5,5 +5,6 @@ public record ViajeDto(
     string Destino,
     DateTime FechaSalida,
     DateTime FechaLlegada,
-    string Operador
+    string Operador,
+    int Id = 0
     );

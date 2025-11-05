@@ -33,7 +33,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             viaje.Ruta.Destino,
             viaje.FechaSalida,
             viaje.FechaLlegada,
-            viaje.Operador.Nombre
+            viaje.Operador.Nombre,
+            viaje.Id
         );
     }
 
@@ -124,7 +125,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             viajeDb.Ruta.Destino,
             viajeDb.FechaSalida,
             viajeDb.FechaLlegada,
-            viajeDb.Operador.Nombre
+            viajeDb.Operador.Nombre,
+            viajeDb.Id
         );
     }
 
