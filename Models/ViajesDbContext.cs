@@ -21,10 +21,10 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
                   .HasDefaultValue(DateTimeOffset.UtcNow)
                   .ValueGeneratedOnAdd();
             entity.HasData(
-                new Operador { Nombre = "Star Tours" },
-                new Operador { Nombre = "Viajes López" },
-                new Operador { Nombre = "Transportes Ya" },
-                new Operador { Nombre = "Limousines Centella"}
+                new Operador { Id = 1, Nombre = "Star Tours" },
+                new Operador { Id = 2, Nombre = "Viajes López" },
+                new Operador { Id = 3, Nombre = "Transportes Ya" },
+                new Operador { Id = 4, Nombre = "Limousines Centella"}
             );
         });
 
@@ -37,16 +37,16 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
                   .HasDefaultValue(DateTimeOffset.UtcNow)
                   .ValueGeneratedOnAdd();
             entity.HasData(
-                new Ruta { Origen = "Chihuahua", Destino = "Delicias" },
-                new Ruta { Origen = "Juárez", Destino = "Chihuahua" },
-                new Ruta { Origen = "Delicias", Destino = "Juárez" },
-                new Ruta { Origen = "Delicias", Destino = "Chihuahua" },
-                new Ruta { Origen = "Chihuahua", Destino = "Juárez" },
-                new Ruta { Origen = "Juárez", Destino = "Delicias" },
-                new Ruta { Origen = "Chihuahua", Destino = "Ciudad de México" },
-                new Ruta { Origen = "Ciudad de México", Destino = "Chihuahua" },
-                new Ruta { Origen = "Juárez", Destino = "Ciudad de México" },
-                new Ruta { Origen = "Ciudad de México", Destino = "Juárez" }
+                new Ruta { Id = 1, Origen = "Chihuahua", Destino = "Delicias" },
+                new Ruta { Id = 2, Origen = "Juárez", Destino = "Chihuahua" },
+                new Ruta { Id = 3, Origen = "Delicias", Destino = "Juárez" },
+                new Ruta { Id = 4, Origen = "Delicias", Destino = "Chihuahua" },
+                new Ruta { Id = 5, Origen = "Chihuahua", Destino = "Juárez" },
+                new Ruta { Id = 6, Origen = "Juárez", Destino = "Delicias" },
+                new Ruta { Id = 7, Origen = "Chihuahua", Destino = "Ciudad de México" },
+                new Ruta { Id = 8, Origen = "Ciudad de México", Destino = "Chihuahua" },
+                new Ruta { Id = 9, Origen = "Juárez", Destino = "Ciudad de México" },
+                new Ruta { Id = 10, Origen = "Ciudad de México", Destino = "Juárez" }
             );
         });
 
