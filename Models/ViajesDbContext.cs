@@ -17,6 +17,9 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Nombre).IsRequired();
+            entity.Property(e => e.CreatedAt)
+                  .HasDefaultValue(DateTimeOffset.UtcNow)
+                  .ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<Ruta>(entity =>
@@ -24,6 +27,9 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Origen).IsRequired();
             entity.Property(e => e.Destino).IsRequired();
+            entity.Property(e => e.CreatedAt)
+                  .HasDefaultValue(DateTimeOffset.UtcNow)
+                  .ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<Viaje>(entity =>
@@ -32,7 +38,7 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.Property(e => e.FechaSalida).IsRequired();
             entity.Property(e => e.FechaLlegada).IsRequired();
             entity.Property(e => e.CreatedAt)
-                  .HasDefaultValue(DateTime.UtcNow)
+                  .HasDefaultValue(DateTimeOffset.UtcNow)
                   .ValueGeneratedOnAdd();
 
             entity.HasOne(e => e.Operador)
