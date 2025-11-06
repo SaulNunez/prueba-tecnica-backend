@@ -18,14 +18,14 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Nombre).IsRequired();
             entity.Property(e => e.CreatedAt)
-                  .HasDefaultValue(DateTimeOffset.UtcNow)
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP")
                   .ValueGeneratedOnAdd();
-            entity.HasData(
-                new Operador { Id = 1, Nombre = "Star Tours" },
-                new Operador { Id = 2, Nombre = "Viajes López" },
-                new Operador { Id = 3, Nombre = "Transportes Ya" },
-                new Operador { Id = 4, Nombre = "Limousines Centella"}
-            );
+            entity.HasData([
+                new Operador { Id = 1, Nombre = "Ramón López" },
+                new Operador { Id = 2, Nombre = "Saúl Núñez" },
+                new Operador { Id = 3, Nombre = "Mario Perez" },
+                new Operador { Id = 4, Nombre = "Pedro Ródriguez" }
+            ]);
         });
 
         modelBuilder.Entity<Ruta>(entity =>
@@ -34,9 +34,9 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.Property(e => e.Origen).IsRequired();
             entity.Property(e => e.Destino).IsRequired();
             entity.Property(e => e.CreatedAt)
-                  .HasDefaultValue(DateTimeOffset.UtcNow)
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP")
                   .ValueGeneratedOnAdd();
-            entity.HasData(
+            entity.HasData([
                 new Ruta { Id = 1, Origen = "Chihuahua", Destino = "Delicias" },
                 new Ruta { Id = 2, Origen = "Juárez", Destino = "Chihuahua" },
                 new Ruta { Id = 3, Origen = "Delicias", Destino = "Juárez" },
@@ -47,7 +47,7 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
                 new Ruta { Id = 8, Origen = "Ciudad de México", Destino = "Chihuahua" },
                 new Ruta { Id = 9, Origen = "Juárez", Destino = "Ciudad de México" },
                 new Ruta { Id = 10, Origen = "Ciudad de México", Destino = "Juárez" }
-            );
+            ]);
         });
 
         modelBuilder.Entity<Viaje>(entity =>
@@ -56,7 +56,7 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
             entity.Property(e => e.FechaSalida).IsRequired();
             entity.Property(e => e.FechaLlegada).IsRequired();
             entity.Property(e => e.CreatedAt)
-                  .HasDefaultValue(DateTimeOffset.UtcNow)
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP")
                   .ValueGeneratedOnAdd();
 
             entity.HasOne(e => e.Operador)
