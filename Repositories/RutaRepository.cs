@@ -6,6 +6,7 @@ public interface IRutaRepository
 {
     void AddRuta(Ruta ruta);
     Ruta? GetRutaByOrigenDestino(string origen, string destino);
+    Ruta? GetRutaById(int id);
 }
 
 public class RutaRepository(ViajesDbContext context) : IRutaRepository
@@ -13,6 +14,11 @@ public class RutaRepository(ViajesDbContext context) : IRutaRepository
     public Ruta? GetRutaByOrigenDestino(string origen, string destino)
     {
         return context.Rutas.FirstOrDefault(r => r.Origen == origen && r.Destino == destino);
+    }
+
+    public Ruta? GetRutaById(int id)
+    {
+        return context.Rutas.FirstOrDefault(r => r.Id == id);
     }
 
     public void AddRuta(Ruta ruta)

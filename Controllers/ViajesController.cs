@@ -40,7 +40,7 @@ namespace prueba_tecnica_backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Models.DTOs.ViajeDto viaje)
+        public IActionResult Create([FromBody] Models.DTOs.ViajeInput viaje)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace prueba_tecnica_backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Models.DTOs.ViajeDto viaje)
+        public IActionResult Update(int id, [FromBody] Models.DTOs.ViajeInput viaje)
         {
             try
             {

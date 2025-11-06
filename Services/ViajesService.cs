@@ -6,8 +6,8 @@ namespace prueba_tecnica_backend.Services;
 
 public interface IViajeService
 {
-    int CrearViaje(ViajeDto viaje);
-    ViajeDto EditarViaje(ViajeDto viaje, int id);
+    int CrearViaje(ViajeInput viaje);
+    ViajeDto EditarViaje(ViajeInput viaje, int id);
     List<Viaje> ObtenerListaViajes();
     ViajeDto? ObtenerViajePorId(int id);
     void EliminarViaje(int id);
@@ -38,12 +38,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         );
     }
 
-    public int CrearViaje(ViajeDto viaje)
+    public int CrearViaje(ViajeInput viaje)
     {
-        if (viaje.Origen == "" || viaje.Destino == "")
-        {
-            throw new ArgumentException("El origen y destino no pueden estar vacíos.");
-        }
         if (viaje == null)
         {
             throw new ArgumentNullException(nameof(viaje), "El viaje no puede ser nulo.");
@@ -53,20 +49,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             throw new ArgumentException("La fecha de llegada debe ser posterior a la fecha de salida.");
         }
 
-        var operadorExistente = operadorRepository.GetOperadorByName(viaje.Operador.Trim());
-        if (operadorExistente == null)
-        {
-            operadorExistente = new Operador { Nombre = viaje.Operador.Trim() };
-            operadorRepository.AddOperador(operadorExistente);
-        }
-
-        var rutaExistente = rutaRepository.GetRutaByOrigenDestino(viaje.Origen.Trim(), viaje.Destino.Trim());
-        if (rutaExistente == null)
-        {
-            rutaExistente = new Ruta { Origen = viaje.Origen.Trim(), Destino = viaje.Destino.Trim() };
-            rutaRepository.AddRuta(rutaExistente);
-        }
-
+        var operadorExistente = operadorRepository.GetById(viaje.OperadorId) ?? throw new ArgumentException("El operador especificado no existe.");
+        var rutaExistente = rutaRepository.GetRutaById(viaje.RutaId) ?? throw new ArgumentException("La ruta especificada no existe.");
         var nuevoViaje = new Viaje
         {
             FechaSalida = viaje.FechaSalida,
@@ -78,18 +62,9 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         return nuevoViaje.Id;
     }
 
-    public ViajeDto EditarViaje(ViajeDto viaje, int id)
+    public ViajeDto EditarViaje(ViajeInput viaje, int id)
     {
-        var viajeDb = repository.GetViajeById(id);
-        if (viajeDb == null)
-        {
-            throw new KeyNotFoundException($"No se encontró un viaje con ID {id}.");
-        }
-
-        if (viaje.Origen == "" || viaje.Destino == "")
-        {
-            throw new ArgumentException("El origen y destino no pueden estar vacíos.");
-        }
+        var viajeDb = repository.GetViajeById(id) ?? throw new KeyNotFoundException($"No se encontró un viaje con ID {id}.");
         if (viaje == null)
         {
             throw new ArgumentNullException(nameof(viaje), "El viaje no puede ser nulo.");
@@ -99,19 +74,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             throw new ArgumentException("La fecha de llegada debe ser posterior a la fecha de salida.");
         }
 
-        var operadorExistente = operadorRepository.GetOperadorByName(viaje.Operador.Trim());
-        if (operadorExistente == null)
-        {
-            operadorExistente = new Operador { Nombre = viaje.Operador.Trim() };
-            operadorRepository.AddOperador(operadorExistente);
-        }
-
-        var rutaExistente = rutaRepository.GetRutaByOrigenDestino(viaje.Origen.Trim(), viaje.Destino.Trim());
-        if (rutaExistente == null)
-        {
-            rutaExistente = new Ruta { Origen = viaje.Origen.Trim(), Destino = viaje.Destino.Trim() };
-            rutaRepository.AddRuta(rutaExistente);
-        }
+        var operadorExistente = operadorRepository.GetById(viaje.OperadorId) ?? throw new ArgumentException("El operador especificado no existe.");
+        var rutaExistente = rutaRepository.GetRutaById(viaje.RutaId) ?? throw new ArgumentException("La ruta especificada no existe.");
 
         viajeDb.FechaSalida = viaje.FechaSalida;
         viajeDb.FechaLlegada = viaje.FechaLlegada;
