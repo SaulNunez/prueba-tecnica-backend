@@ -18,6 +18,14 @@ builder.Services.AddScoped<IViajeRepository, ViajeRepository>();
 builder.Services.AddScoped<IViajeService, ViajeService>();
 builder.Services.AddScoped<IOperadorService, OperadorService>();
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAngularClient",
+            builder => builder.WithOrigins("http://localhost:4200")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod());
+    });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     InitializeDb(app);
 }
+
+app.UseCors("AllowAngularClient");
 
 //app.UseHttpsRedirection();
 
