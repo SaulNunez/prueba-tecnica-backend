@@ -30,6 +30,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    InitializeDb(app);
 }
 
 //app.UseHttpsRedirection();
@@ -39,3 +40,14 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static void InitializeDb(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+    using var context = scope.ServiceProvider.GetService<ViajesDbContext>();
+    if(context == null)
+    {
+        Console.WriteLine($"No se pudo encontrar en DI el contexto {nameof(ViajesDbContext)}, puede que no se inicialize correctamente la base de datos!");
+    }
+    context?.Database.Migrate();
+}
