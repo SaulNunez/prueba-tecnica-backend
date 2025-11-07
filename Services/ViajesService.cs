@@ -8,16 +8,20 @@ public interface IViajeService
 {
     int CrearViaje(ViajeInput viaje);
     ViajeDto EditarViaje(ViajeInput viaje, int id);
-    List<Viaje> ObtenerListaViajes();
+    List<ViajeDto> ObtenerListaViajes();
     ViajeDto? ObtenerViajePorId(int id);
     void EliminarViaje(int id);
 }
 
 public class ViajeService(IViajeRepository repository, IOperadorRepository operadorRepository, IRutaRepository rutaRepository) : IViajeService
 {
-    public List<Viaje> ObtenerListaViajes()
+    public List<ViajeDto> ObtenerListaViajes()
     {
-        return repository.GetAllViajes();
+        var viajes = repository.GetAllViajes();
+        return viajes.Select(v => new ViajeDto(
+            v.Ruta.Origen, v.Ruta.Destino, v.FechaSalida,
+            v.FechaLlegada, v.Operador.Nombre, v.Id))
+            .ToList();
     }
     public ViajeDto? ObtenerViajePorId(int id)
     {

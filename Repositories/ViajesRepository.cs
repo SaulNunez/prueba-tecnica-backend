@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using prueba_tecnica_backend.Models;
 
 namespace prueba_tecnica_backend.Repositories;
@@ -15,11 +16,11 @@ public class ViajeRepository(ViajesDbContext context) : IViajeRepository
 {
     public List<Viaje> GetAllViajes()
     {
-        return context.Viajes.ToList();
+        return context.Viajes.Include(v => v.Ruta).Include(v => v.Operador).ToList();
     }
     public Viaje? GetViajeById(int id)
     {
-        return context.Viajes.FirstOrDefault(v => v.Id == id);
+        return context.Viajes.Include(v => v.Ruta).Include(v => v.Operador).FirstOrDefault(v => v.Id == id);
     }
 
     public void AddViaje(Viaje viaje)
