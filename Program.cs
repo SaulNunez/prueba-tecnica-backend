@@ -17,6 +17,7 @@ builder.Services.AddScoped<IRutaRepository, RutaRepository>();
 builder.Services.AddScoped<IViajeRepository, ViajeRepository>();
 builder.Services.AddScoped<IViajeService, ViajeService>();
 builder.Services.AddScoped<IOperadorService, OperadorService>();
+builder.Services.AddScoped<IRutasService, RutasService>();
 
 builder.Services.AddCors(options =>
     {

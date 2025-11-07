@@ -7,6 +7,7 @@ public interface IRutaRepository
     void AddRuta(Ruta ruta);
     Ruta? GetRutaByOrigenDestino(string origen, string destino);
     Ruta? GetRutaById(int id);
+    List<Ruta> GetRutas();
 }
 
 public class RutaRepository(ViajesDbContext context) : IRutaRepository
@@ -26,4 +27,9 @@ public class RutaRepository(ViajesDbContext context) : IRutaRepository
         context.Rutas.Add(ruta);
         context.SaveChanges();
     }
+
+    public List<Ruta> GetRutas()
+    {
+        return context.Rutas.ToList();
+    } 
 }
