@@ -20,7 +20,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         var viajes = repository.GetAllViajes();
         return viajes.Select(v => new ViajeDto(
             v.Ruta.Origen, v.Ruta.Destino, v.FechaSalida,
-            v.FechaLlegada, v.Operador.Nombre, v.Id))
+            v.FechaLlegada, v.Operador.Nombre, v.Id, v.RutaId,
+            v.OperadorId))
             .ToList();
     }
     public ViajeDto? ObtenerViajePorId(int id)
@@ -38,7 +39,9 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             viaje.FechaSalida,
             viaje.FechaLlegada,
             viaje.Operador.Nombre,
-            viaje.Id
+            viaje.Id,
+            viaje.RutaId,
+            viaje.OperadorId
         );
     }
 
@@ -94,7 +97,9 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
             viajeDb.FechaSalida,
             viajeDb.FechaLlegada,
             viajeDb.Operador.Nombre,
-            viajeDb.Id
+            viajeDb.Id,
+            viaje.RutaId,
+            viaje.OperadorId
         );
     }
 
