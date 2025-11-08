@@ -16,6 +16,7 @@ namespace prueba_tecnica_backend.Controllers
             }
             catch (Exception ex)
             {
+                Console.Error.WriteLine(ex.StackTrace);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal server error occurred" });
             }
         }

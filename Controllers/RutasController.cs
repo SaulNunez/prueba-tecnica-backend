@@ -17,6 +17,7 @@ public class RutasController(IRutasService rutasService) : ControllerBase
         }
         catch (Exception ex)
         {
+            Console.Error.WriteLine(ex.StackTrace);
             return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Internal server error occurred" });
         }
     }
