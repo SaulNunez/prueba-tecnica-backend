@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using prueba_tecnica_backend.Models;
 
 namespace prueba_tecnica_backend.Repositories;
@@ -19,7 +20,8 @@ public class RutaRepository(ViajesDbContext context) : IRutaRepository
 
     public Ruta? GetRutaById(int id)
     {
-        return context.Rutas.FirstOrDefault(r => r.Id == id);
+        //return context.Rutas.FirstOrDefault(r => r.Id == id);
+        return context.Rutas.FromSql($"SELECT * FROM Rutas ORDER BY Origen LIMIT 1").FirstOrDefault();
     }
 
     public void AddRuta(Ruta ruta)
@@ -30,6 +32,7 @@ public class RutaRepository(ViajesDbContext context) : IRutaRepository
 
     public List<Ruta> GetRutas()
     {
-        return context.Rutas.ToList();
+        //return context.Rutas.OrderBy(r => r.Origen).ToList();
+        return context.Rutas.FromSql($"SELECT * FROM Rutas ORDER BY Origen").ToList();
     } 
 }

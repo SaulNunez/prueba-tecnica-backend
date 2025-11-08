@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using prueba_tecnica_backend.Models;
 
 namespace prueba_tecnica_backend.Repositories;
@@ -19,7 +20,8 @@ public class OperadorRepository(ViajesDbContext context) : IOperadorRepository
 
     public List<Operador> GetAllOperadores()
     {
-        return context.Operadores.ToList();
+        return context.Operadores.FromSql($"SELECT * FROM Operadores ORDER BY Nombre").ToList();
+        //return context.Operadores.OrderBy(o => o.Nombre).ToList();
     }
 
     public Operador? GetOperadorByName(string name)

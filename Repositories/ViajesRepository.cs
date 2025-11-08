@@ -16,11 +16,14 @@ public class ViajeRepository(ViajesDbContext context) : IViajeRepository
 {
     public List<Viaje> GetAllViajes()
     {
-        return context.Viajes.Include(v => v.Ruta).Include(v => v.Operador).ToList();
+        /*return context.Viajes.FromSql($"SELECT * FROM Viajes ORDER BY FechaInicio")
+            .Include(v => v.Ruta).Include(v => v.Operador).ToList();*/
+        return context.Viajes.OrderBy(v => v.FechaInicio).Include(v => v.Ruta).Include(v => v.Operador).ToList();
     }
     public Viaje? GetViajeById(int id)
     {
-        return context.Viajes.Include(v => v.Ruta).Include(v => v.Operador).FirstOrDefault(v => v.Id == id);
+        //return context.Viajes.FromSql($"SELECT * FROM Viajes WHERE Id = {id} ORDER BY FechaInicio").Include(v => v.Ruta).Include(v => v.Operador).FirstOrDefault();
+        return context.Viajes.OrderBy(v => v.FechaInicio).Include(v => v.Ruta).Include(v => v.Operador).FirstOrDefault(v => v.Id == id);
     }
 
     public void AddViaje(Viaje viaje)
