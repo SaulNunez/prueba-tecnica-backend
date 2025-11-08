@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ViajesDbContext>(options =>
 {
-    options.UseSqlite(
+    options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 

@@ -20,8 +20,8 @@ public class OperadorRepository(ViajesDbContext context) : IOperadorRepository
 
     public List<Operador> GetAllOperadores()
     {
-        return context.Operadores.FromSql($"SELECT * FROM Operadores ORDER BY Nombre").ToList();
-        //return context.Operadores.OrderBy(o => o.Nombre).ToList();
+        //return context.Operadores.FromSql($"SELECT * FROM Operadores ORDER BY Nombre").ToList();
+        return context.Operadores.OrderBy(o => o.Nombre).ToList();
     }
 
     public Operador? GetOperadorByName(string name)
