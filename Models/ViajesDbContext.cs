@@ -53,8 +53,8 @@ public class ViajesDbContext(DbContextOptions<ViajesDbContext> options) : DbCont
         modelBuilder.Entity<Viaje>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.FechaSalida).IsRequired();
-            entity.Property(e => e.FechaLlegada).IsRequired();
+            entity.Property(e => e.FechaInicio).IsRequired();
+            entity.Property(e => e.FechaFin).IsRequired();
             entity.Property(e => e.CreatedAt)
                   .HasDefaultValueSql("CURRENT_TIMESTAMP")
                   .ValueGeneratedOnAdd();

@@ -19,8 +19,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
     {
         var viajes = repository.GetAllViajes();
         return viajes.Select(v => new ViajeDto(
-            v.Ruta.Origen, v.Ruta.Destino, v.FechaSalida,
-            v.FechaLlegada, v.Operador.Nombre, v.Id, v.RutaId,
+            v.Ruta.Origen, v.Ruta.Destino, v.FechaInicio,
+            v.FechaFin, v.Operador.Nombre, v.Id, v.RutaId,
             v.OperadorId))
             .ToList();
     }
@@ -36,8 +36,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         return new ViajeDto(
             viaje.Ruta.Origen,
             viaje.Ruta.Destino,
-            viaje.FechaSalida,
-            viaje.FechaLlegada,
+            viaje.FechaInicio,
+            viaje.FechaFin,
             viaje.Operador.Nombre,
             viaje.Id,
             viaje.RutaId,
@@ -60,8 +60,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         var rutaExistente = rutaRepository.GetRutaById(viaje.RutaId) ?? throw new ArgumentException("La ruta especificada no existe.");
         var nuevoViaje = new Viaje
         {
-            FechaSalida = viaje.FechaSalida,
-            FechaLlegada = viaje.FechaLlegada,
+            FechaInicio = viaje.FechaSalida,
+            FechaFin = viaje.FechaLlegada,
             OperadorId = operadorExistente.Id,
             RutaId = rutaExistente.Id
         };
@@ -84,8 +84,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         var operadorExistente = operadorRepository.GetById(viaje.OperadorId) ?? throw new ArgumentException("El operador especificado no existe.");
         var rutaExistente = rutaRepository.GetRutaById(viaje.RutaId) ?? throw new ArgumentException("La ruta especificada no existe.");
 
-        viajeDb.FechaSalida = viaje.FechaSalida;
-        viajeDb.FechaLlegada = viaje.FechaLlegada;
+        viajeDb.FechaInicio = viaje.FechaSalida;
+        viajeDb.FechaFin = viaje.FechaLlegada;
         viajeDb.OperadorId = operadorExistente.Id;
         viajeDb.RutaId = rutaExistente.Id;
 
@@ -94,8 +94,8 @@ public class ViajeService(IViajeRepository repository, IOperadorRepository opera
         return new ViajeDto(
             viajeDb.Ruta.Origen,
             viajeDb.Ruta.Destino,
-            viajeDb.FechaSalida,
-            viajeDb.FechaLlegada,
+            viajeDb.FechaInicio,
+            viajeDb.FechaFin,
             viajeDb.Operador.Nombre,
             viajeDb.Id,
             viaje.RutaId,

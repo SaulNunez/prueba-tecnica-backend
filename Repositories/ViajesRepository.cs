@@ -34,8 +34,8 @@ public class ViajeRepository(ViajesDbContext context) : IViajeRepository
         var existingViaje = context.Viajes.FirstOrDefault(v => v.Id == id);
         if (existingViaje != null)
         {
-            existingViaje.FechaSalida = viaje.FechaSalida;
-            existingViaje.FechaLlegada = viaje.FechaLlegada;
+            existingViaje.FechaInicio = viaje.FechaInicio;
+            existingViaje.FechaFin = viaje.FechaFin;
             existingViaje.OperadorId = viaje.OperadorId;
             context.SaveChanges();
         }
