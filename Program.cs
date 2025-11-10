@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ViajesDbContext>(options =>
 {
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"));
+        builder.Configuration.GetConnectionString("DefaultConnection"), 
+        (options) => options.EnableRetryOnFailure());
 });
 
 builder.Services.AddScoped<IOperadorRepository, OperadorRepository>();
